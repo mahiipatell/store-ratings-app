@@ -54,6 +54,7 @@ const AdminStoreList = () => {
           <button style={styles.navBtn} onClick={() => navigate('/admin/dashboard')}>Dashboard</button>
           <button style={styles.navBtn} onClick={() => navigate('/admin/users')}>Users</button>
           <button style={styles.navBtn} onClick={() => navigate('/admin/users/add')}>Add User</button>
+          <button style={styles.navBtn} onClick={() => navigate('/admin/stores/add')}>Add Store</button>
           <button style={styles.logoutBtn} onClick={handleLogout}>Logout</button>
         </div>
       </div>

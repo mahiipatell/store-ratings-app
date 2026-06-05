@@ -116,8 +116,11 @@ const UserStoreList = () => {
       <div style={styles.navbar}>
         <h1 style={styles.navTitle}>Store Ratings</h1>
         <div style={styles.navLinks}>
-          <span style={styles.navUser}>👤 {user?.name}</span>
-          <button style={styles.logoutBtn} onClick={handleLogout}>Logout</button>
+            <button style={styles.navBtn} onClick={() => navigate('/change-password')}>
+                Change Password
+            </button>
+            <span style={styles.navUser}>👤 {user?.name}</span>
+            <button style={styles.logoutBtn} onClick={handleLogout}>Logout</button>
         </div>
       </div>
 
@@ -257,6 +260,11 @@ const styles = {
   },
   navTitle: { color: '#fff', fontSize: '18px', fontWeight: '700', margin: 0 },
   navLinks: { display: 'flex', gap: '12px', alignItems: 'center' },
+  navBtn: {
+    backgroundColor: 'transparent', color: '#fff',
+    border: '1px solid rgba(255,255,255,0.4)', padding: '6px 14px',
+    borderRadius: '6px', cursor: 'pointer', fontSize: '14px'
+  },
   navUser: { color: 'rgba(255,255,255,0.85)', fontSize: '14px' },
   logoutBtn: {
     backgroundColor: '#fff', color: '#4f46e5', border: 'none',
