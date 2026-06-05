@@ -158,4 +158,74 @@ const createStore = async (req, res) => {
   }
 }
 
-module.exports = { getStores, getStoreById, createStore }
+/**
+ * GET /api/stores/owner/dashboard
+ * Store Owner only - View ratings for their store and average rating
+ */
+const getOwnerDashboard = async (req, res) => {
+  try {
+    // req.user.id is the logged in store owner's user ID
+    const ownerId = req.user.id
+
+    // Find all stores owned by this store owner
+    const stores = await prisma.store.findMany({
+      where: { ownerId },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        address: true,
+        // Get all ratings for this store, including the user who submitted them
+        ratings: {
+          select: {
+            id: true,
+            value: true,
+            createdAt: true,
+            // Include basic info of the user who submitted the rating
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true
+              }
+            }
+          },
+          // Show most recent ratings first
+          orderBy: { createdAt: 'desc' }
+        }
+      }
+    })
+
+    // For each store, compute the average rating and format the response
+    const storesWithStats = stores.map(store => {
+      // Extract just the rating values for average calculation
+      const ratingValues = store.ratings.map(r => r.value)
+
+      // Calculate average rating, null if no ratings yet
+      const averageRating = ratingValues.length > 0
+        ? parseFloat(
+            (ratingValues.reduce((sum, v) => sum + v, 0) / ratingValues.length).toFixed(2)
+          )
+        : null
+
+      return {
+        id: store.id,
+        name: store.name,
+        email: store.email,
+        address: store.address,
+        averageRating,
+        totalRatings: store.ratings.length, // total number of ratings submitted
+        ratings: store.ratings              // list of users who rated with their values
+      }
+    })
+
+    res.json(storesWithStats)
+
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Server error' })
+  }
+}
+
+
+module.exports = { getStores, getStoreById, createStore, getOwnerDashboard }
