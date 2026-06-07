@@ -124,7 +124,7 @@ Average ratings are computed dynamically via SQL aggregation — not stored as a
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/store-ratings-app.git
+git clone https://github.com/mahiipatell/store-ratings-app.git
 cd store-ratings-app
 ```
 
