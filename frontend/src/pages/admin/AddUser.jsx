@@ -68,7 +68,7 @@ const AddUser = () => {
                 placeholder="20-60 characters"
                 {...register('name', {
                   required: 'Name is required',
-                  minLength: { value: 20, message: 'Name must be at least 20 characters' },
+                  minLength: { value: 6, message: 'Name must be at least 6 characters' },
                   maxLength: { value: 60, message: 'Name must be at most 60 characters' }
                 })}
               />

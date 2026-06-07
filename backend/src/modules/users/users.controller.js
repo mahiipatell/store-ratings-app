@@ -166,9 +166,9 @@ const createUser = async (req, res) => {
       return res.status(400).json({ message: 'All fields are required' })
     }
 
-    // Validate name length (requirement: 20-60 chars)
-    if (name.length < 20 || name.length > 60) {
-      return res.status(400).json({ message: 'Name must be between 20 and 60 characters' })
+    // Validate name length (requirement: 6-60 chars)
+    if (name.length < 6 || name.length > 60) {
+      return res.status(400).json({ message: 'Name must be between 6 and 60 characters' })
     }
 
     // Validate address length (requirement: max 400 chars)

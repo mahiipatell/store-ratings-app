@@ -12,8 +12,8 @@ const register = async (req, res) => {
       return res.status(400).json({ message: 'All fields are required' })
     }
 
-    if (name.length < 20 || name.length > 60) {
-      return res.status(400).json({ message: 'Name must be between 20 and 60 characters' })
+    if (name.length < 6 || name.length > 60) {
+      return res.status(400).json({ message: 'Name must be between 6 and 60 characters' })
     }
 
     if (address.length > 400) {

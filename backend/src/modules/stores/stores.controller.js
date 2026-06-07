@@ -119,8 +119,8 @@ const createStore = async (req, res) => {
     }
 
     // Validate name length
-    if (name.length < 20 || name.length > 60) {
-      return res.status(400).json({ message: 'Store name must be between 20 and 60 characters' })
+    if (name.length < 6 || name.length > 60) {
+      return res.status(400).json({ message: 'Store name must be between 6 and 60 characters' })
     }
 
     // Validate address length
